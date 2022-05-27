@@ -10,23 +10,23 @@
 <body>
     <header>
         <section class="view-scores" id="view-scores">
+            <!-- <p><a href="./high-scores.html">View High Scores</a></p> -->
             <p>View High Scores</p>
         </section>
-        <section class="timer" id="timer">
-            <p>Time:</p>
+        <section class="timer">
+            <p>Time: <span id="time">0</span></p>
         </section>
     </header>
 
     <main>
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
-        <button>Start Quiz</button>
+        <section class="opening" id="opening">
+            <article class="text">
+                <h1>Coding Quiz Challenge</h1>
+                <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
+            </article>
+            <button class="btn" id="btn-start" type="button">Start Quiz</button>
+        </section>
     </main>
-
-    <footer>
-        <p>&copy;Longyang Wang 2022</p>
-    </footer>
-
 
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/questions.js"></script>
