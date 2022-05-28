@@ -14,21 +14,30 @@
             <p>View High Scores</p>
         </section>
         <section class="timer">
-            <p>Time: <span id="time">0</span></p>
+            <p>Time:<span id="time">0</span>s</p>
         </section>
     </header>
 
     <main>
         <section class="opening" id="opening">
-            <article class="text">
-                <h1>Coding Quiz Challenge</h1>
-                <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
-            </article>
-            <button class="btn" id="btn-start" type="button">Start Quiz</button>
+            <section class="container">
+                <article class="text">
+                    <h1>Coding Quiz Challenge</h1>
+                    <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
+                </article>
+                <button class="btn" id="btn-start" type="button">Start Quiz</button>
+            </section>
+
         </section>
+        <div class="divider"></div>
+
+        <section class="result" id="check"></section>
+
     </main>
 
+
+
+
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/questions.js"></script>
 </body>
 </html>

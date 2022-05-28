@@ -22,8 +22,8 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    margin: 35px 100px;
+    padding: 15px;
+    margin: 30px 100px 0 100px;
 }
 
 .text {
@@ -31,18 +31,37 @@ header {
     margin: 50px 100px 0 100px;
 }
 
-.text h1 {
+.text h1, .show-quiz h1 {
     font-size: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 20px;
     margin: 10px;
 }
 
-.text p {
+.text p, .answer {
     font-size: 26px;
     font-family:  Helvetica, Arial, sans-serif;
     padding: 20px;
     margin: 10px;
+}
+
+.container {
+    text-align: center;
+}
+
+.divider {
+    visibility: hidden;
+    border: 2px solid rgba(128, 128, 128, 0.5);
+    width: 800px;
+    margin: 0 auto;
+}
+
+.result {
+    /* background-color: red; */
+    margin: 10px 50px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .btn {
@@ -53,6 +72,8 @@ header {
     background-color: rgb(0, 80, 239);
     border: none;
     padding: 5px;
-    margin: 15px;
+    margin: 10px;
     cursor: pointer;
 }
+
+

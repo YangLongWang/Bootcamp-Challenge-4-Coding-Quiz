@@ -1,6 +1,6 @@
-const questions = [
+const questionsObj = [
     {
-        question: "Commonly used data types DO NOT include:",
+        question: "Commonly used data types DO NOT include:", 
         a: "A. strings", 
         b: "B. booleans", 
         c: "C. alerts", 
