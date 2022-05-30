@@ -42,3 +42,17 @@ const questionsObj = [
         d: "D. "
     }
 ];
+
+var callBack = function(eventType, fn) {
+    e = {
+        name: "Longyang"
+    }
+    if( eventType === "click") {
+        fn(e)
+    }
+}
+
+callBack("click" , function(e) {
+    console.log(e.name);
+})
+

@@ -4,45 +4,51 @@ const questionsObj = [
         a: "A. strings", 
         b: "B. booleans", 
         c: "C. alerts", 
-        d: "D. numbers"
+        d: "D. numbers",
+        answer: "C. alerts"
     },
     {
         question: "The condition in an if/else statement is enclosed with _____.",
         a: "A. quotes",
         b: "B. curly brackets",
         c: "C. parenthesis",
-        d: "D. square brackets"
+        d: "D. square brackets",
+        answer: "C. parenthesis"
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
         a: "A. numbers and strings",
         b: "B. other arrays",
         c: "C. booleans",
-        d: "D. all of the above"
+        d: "D. all of the above",
+        answer: "D. all of the above"
     },
     {
         question: "String values must be enclosed within _____ when being assigned to variables.",
         a: "A. commas",
         b: "B. curly brackets",
         c: "C. quotes",
-        d: "D. parenthesis"
+        d: "D. parenthesis",
+        answer: "C. quotes"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         a: "A. JavaScript",
         b: "B. terminal/bash",
         c: "C. for loops",
-        d: "D. console.log"
+        d: "D. console.log",
+        answer: "D. console.log"
     }
 ];
 
-const rightAnswer = ["c", "c", "d", "c", "d"];
+// const rightAnswer = ["c", "c", "d", "c", "d"];
 
 var optionIdCounter = 0;
 var opening = document.querySelector(".opening");
 var result = document.querySelector(".result");
-var time = document.getElementById("time");
-var secondTime = 75;
+var timeEl = document.getElementById("time");
+
+// var timeLeft = 75;
 
 
 
@@ -68,7 +74,7 @@ function showQuiz() {
     // 4 options
     var options = document.createElement("section");
     options.className = "answer";
-
+    options.setAttribute("data-options-id", optionIdCounter);
     quiz.appendChild(options);
 
     var opA = document.createElement("option");
@@ -93,9 +99,18 @@ function showQuiz() {
 
     // 4 options end
     // whole one question end
-
+    console.log(quiz);
+    optionIdCounter++;
+    console.log(options);
     // check the result
-    if (1<2) {
+
+    var checkAnswer = document.querySelector(".answer").addEventListener("click", checkAnswer);
+}
+
+function checkAnswer(event) {
+    var answerEl = event.target;
+
+    if (answerEl.matches("questionsObj".answer)) {
         var check = document.getElementById("check");
         check = document.createElement("p");
         check.className = "check";
@@ -116,19 +131,20 @@ function showQuiz() {
         console.log(result);
 
     }
-
-    console.log(quiz);
 }
 
 function countDown() {
-    // Countdown
-    while (secondTime>=0) {
-        time.textContent = `${secondTime}`;
-        secondTime--;    
-
-    } 
-
-    // Countdown end
+    var timeLeft = 75;
+    var timeInterval = setInterval(function() {
+        if (timeLeft >= 1) {
+            timeEl.textContent = timeLeft + "s";
+            timeLeft--;
+        } else {
+            timeEl.textContent = 0 + "s";
+            clearInterval(timeInterval);
+            // show message (next?)
+        }
+    }, 1000);
 }
 
 
