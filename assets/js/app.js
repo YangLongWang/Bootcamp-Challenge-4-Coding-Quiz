@@ -50,7 +50,7 @@ var opening = document.querySelector(".opening");
 var result = document.querySelector(".result");
 var timeEl = document.getElementById("time");
 var saveScores = [];
-
+var quizEl = document.querySelector(".show-quiz");
 
 function goViewHighScores() {
     window.location.href = "high-scores.html";
@@ -65,11 +65,7 @@ function startQuiz() {
 
 function showQuiz() {
 
-    if (quizIdCounter >= questionsObj.length) {
-        end();
-
-    } else {
-
+    if (quizIdCounter === quizIndex) {
         // whole one question (question + options)
         var quiz = document.createElement("div");
         quiz.className = "show-quiz";
@@ -104,8 +100,6 @@ function showQuiz() {
         opC.textContent = questionsObj[quizIndex].c;
         opD.textContent = questionsObj[quizIndex].d;
 
-
-
         options.appendChild(opA);
         options.appendChild(opB);
         options.appendChild(opC);
@@ -119,7 +113,14 @@ function showQuiz() {
         quizIndex++;
 
         // check the result
-        checkAnswer();
+        checkAnswer();        
+
+    } else {
+
+
+        clearInterval(timeInterval);
+        console.log("here");
+        end();
     }
 }
 
@@ -129,27 +130,27 @@ function checkAnswer() {
         var targetEl = event.target;    
         if (targetEl.matches(".btn-4")) {
             result.innerHTML = "Correct!"
-            scores = scores + 10;
+            scores += 10;
             saveScores.push(scores);
             saveMark();
 
             setTimeout(function() {
                 var next = document.querySelector(".show-quiz");
                 next.remove();
-                console.log(result);
+                // console.log(result);
                 result.innerHTML = "";  
+
                 if(quizIdCounter < questionsObj.length) {
                     console.log(quizIdCounter);
                     showQuiz(); 
-                } else {
+                } else if (quizIdCounter === questionsObj.length) {
                     end();
-                } 
-                               
+                }             
             }, 1000);
-
+                
         } else {
             result.innerHTML = "Wrong!"
-            scores = scores - 10;
+            scores -= 10;
             saveScores.push(scores);
             saveMark();
 
@@ -160,47 +161,76 @@ function checkAnswer() {
                 if(quizIdCounter < questionsObj.length) {
                     console.log(quizIdCounter);
                     showQuiz(); 
-                } else {
+                } else if (quizIdCounter === questionsObj.length) {
                     end();
-                } 
+                }             
               
             }, 1000);
         }
     })
 }
 
-function reset() {
-    if (quizIdCounter <= questionsObj.length) {
-        var next = document.querySelector(".show-quiz");
-        next.remove();
-        var reResult = document.querySelector(".check");
-        reResult.remove();                
-
-        showQuiz();
-    }
-}
-
 function countDown() {
     timeLeft = 75;
     var timeInterval = setInterval(function() {
-        if (timeLeft >= 1) {
-            timeEl.textContent = timeLeft + "s";
-            timeLeft--;
-        } else {
-            timeEl.textContent = 0 + "s";
-            clearInterval(timeInterval);
-            end();
+
+        var resultEl = document. querySelector(".result");
+        if(resultEl.innerHTML.match(/wrong/gi)) {
+            timeLeft = timeLeft - 10;
         }
+        timeEl.textContent = timeLeft + "s";
+        timeLeft--;
+
+        if(timeLeft <= 0 || quizIdCounter > questionsObj.length) {
+            // console.log("end");
+            clearInterval(timeInterval);
+            timeEl.textContent = 0 + "s";
+            // window.alert("The quiz is over")
+        }
+
+        
     }, 1000);
 }
 
+// if (timeLeft < 1 || quizIdCounter > questionsObj.length)
+
 function end() {
     console.log("end, show high scores and record name");
+    var quiz = document.createElement("div");
+    quiz.className = "show-quiz";
+    quiz.setAttribute("data-quiz-id", quizIdCounter);
+    quiz.innerHTML = "<h1>All done!</h1>";
+    
+    opening.appendChild(quiz);
+
+
+    var options = document.createElement("div");
+    options.className = "answer";
+    options.innerHTML = "<p>Your final score is <strong>" + scores + "</strong>!</p>"
+
+    quiz.appendChild(options);
+
+    var formEl = document.createElement("form");
+
+    formEl.className = "form";
+
+    // opA.setAttribute("data-answer-id", answerIdCounter);
+
+    formEl.textContent = "Enter initials: ";
+
+    quiz.appendChild(formEl);   
+
+    var submit = document.createElement("button");
+    submit.className = "btn";
+    submit.textContent = "Submit";
+
+    quiz.appendChild(submit);
+
 }
 
 var saveMark = function() {
     localStorage.setItem("scores", JSON.stringify(saveScores));
-    console.log(saveScores);
+    // console.log(saveScores);
 }
 
 
