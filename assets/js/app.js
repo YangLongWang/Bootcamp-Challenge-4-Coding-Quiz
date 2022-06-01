@@ -41,7 +41,7 @@ const questionsObj = [
     }
 ];
 
-var quizIdCounter = -1;
+var quizIdCounter = 0;
 var answerIdCounter = 0; 
 var quizIndex = 0;
 var scores = 0;
@@ -113,11 +113,10 @@ function showQuiz() {
 
         // 4 options end
         // whole one question end
-        console.log(quiz);
+
         quizIdCounter++;
         answerIdCounter++;
         quizIndex++;
-        console.log(quizIdCounter);
 
         // check the result
         checkAnswer();
@@ -125,6 +124,7 @@ function showQuiz() {
 }
 
 function checkAnswer() {
+
     document.querySelector(".answer").addEventListener("click", function(event) {
         var targetEl = event.target;    
         if (targetEl.matches(".btn-4")) {
@@ -137,24 +137,17 @@ function checkAnswer() {
                 var next = document.querySelector(".show-quiz");
                 next.remove();
                 console.log(result);
-                result.innerHTML = "";         
-                showQuiz();                
+                result.innerHTML = "";  
+                if(quizIdCounter < questionsObj.length) {
+                    console.log(quizIdCounter);
+                    showQuiz(); 
+                } else {
+                    end();
+                } 
+                               
             }, 1000);
 
-            
         } else {
-            // var check = document.getElementById("check");
-            // check = document.createElement("p");
-            // check.className = "check";
-            // check.textContent = "Wrong!";
-            // check.setAttribute("style","font-size: 25px; font-style: italic; color: rgba(128, 128, 128, 1); letter-spacing: 1px; ")
-            // result.appendChild(check);
-            // scores = scores - 10;
-            // saveScores.push(scores);
-            // saveMark();
-            // console.log(result);
-            // showQuiz();
-
             result.innerHTML = "Wrong!"
             scores = scores - 10;
             saveScores.push(scores);
@@ -163,8 +156,14 @@ function checkAnswer() {
             setTimeout(function() {
                 var next = document.querySelector(".show-quiz");
                 next.remove();
-                result.innerHTML = "";         
-                showQuiz();                
+                result.innerHTML = "";
+                if(quizIdCounter < questionsObj.length) {
+                    console.log(quizIdCounter);
+                    showQuiz(); 
+                } else {
+                    end();
+                } 
+              
             }, 1000);
         }
     })
