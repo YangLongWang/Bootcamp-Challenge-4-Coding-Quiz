@@ -41,6 +41,7 @@ const questionsObj = [
     }
 ];
 
+var nameId = 0;
 var quizIdCounter = 0;
 var answerIdCounter = 0; 
 var quizIndex = 0;
@@ -49,8 +50,8 @@ var timeLeft = 0;
 var opening = document.querySelector(".opening");
 var result = document.querySelector(".result");
 var timeEl = document.getElementById("time");
-var saveScores = [];
-var quizEl = document.querySelector(".show-quiz");
+var saveInfo = [];
+
 
 function goViewHighScores() {
     window.location.href = "high-scores.html";
@@ -65,7 +66,7 @@ function startQuiz() {
 
 function showQuiz() {
 
-    if (quizIdCounter === quizIndex) {
+    if (quizIdCounter <= questionsObj.length) {
         // whole one question (question + options)
         var quiz = document.createElement("div");
         quiz.className = "show-quiz";
@@ -118,9 +119,9 @@ function showQuiz() {
     } else {
 
 
-        clearInterval(timeInterval);
-        console.log("here");
-        end();
+        // clearInterval(timeInterval);
+        // console.log("here");
+        // end();
     }
 }
 
@@ -131,7 +132,7 @@ function checkAnswer() {
         if (targetEl.matches(".btn-4")) {
             result.innerHTML = "Correct!"
             scores += 10;
-            saveScores.push(scores);
+            saveInfo.push(scores);
             saveMark();
 
             setTimeout(function() {
@@ -151,7 +152,7 @@ function checkAnswer() {
         } else {
             result.innerHTML = "Wrong!"
             scores -= 10;
-            saveScores.push(scores);
+            saveInfo.push(scores);
             saveMark();
 
             setTimeout(function() {
@@ -181,8 +182,8 @@ function countDown() {
         timeEl.textContent = timeLeft + "s";
         timeLeft--;
 
-        if(timeLeft <= 0 || quizIdCounter > questionsObj.length) {
-            // console.log("end");
+        if(timeLeft <= 0 || saveInfo.length === questionsObj.length) {
+            console.log("time end");
             clearInterval(timeInterval);
             timeEl.textContent = 0 + "s";
             // window.alert("The quiz is over")
@@ -190,19 +191,20 @@ function countDown() {
 
         
     }, 1000);
+
+    startQuiz();
 }
 
 // if (timeLeft < 1 || quizIdCounter > questionsObj.length)
 
 function end() {
-    console.log("end, show high scores and record name");
+
     var quiz = document.createElement("div");
     quiz.className = "show-quiz";
     quiz.setAttribute("data-quiz-id", quizIdCounter);
     quiz.innerHTML = "<h1>All done!</h1>";
     
     opening.appendChild(quiz);
-
 
     var options = document.createElement("div");
     options.className = "answer";
@@ -211,29 +213,48 @@ function end() {
     quiz.appendChild(options);
 
     var formEl = document.createElement("form");
-
     formEl.className = "form";
+    formEl.setAttribute("data-name-id", nameId);
+    formEl.innerHTML = "<p>Enter initials: </p>";
+    options.appendChild(formEl);
 
-    // opA.setAttribute("data-answer-id", answerIdCounter);
+    var form = document.createElement("input");
+    form.className = "text-input";
+    form.setAttribute("type", "text");
+    form.setAttribute("name", "user-name");
+    form.setAttribute("placeholder", "Enter initials name");
 
-    formEl.textContent = "Enter initials: ";
 
-    quiz.appendChild(formEl);   
+    formEl.appendChild(form);   
 
     var submit = document.createElement("button");
     submit.className = "btn";
+    submit.setAttribute("id", "view-scores");
     submit.textContent = "Submit";
 
     quiz.appendChild(submit);
+    console.log(quiz);
+
+    var nameInput = document.querySelector("input[name = 'user-name']").value;
+    // if (!nameInput) {
+    //     alert("Please enter name.");
+    // }
+
+    var saveObj = {
+        name: nameInput,
+        mark: scores
+    };
+    saveInfo.push(saveObj);
+
 
 }
 
 var saveMark = function() {
-    localStorage.setItem("scores", JSON.stringify(saveScores));
-    // console.log(saveScores);
+    localStorage.setItem("info", JSON.stringify(saveInfo));
+    console.log(saveInfo);
 }
 
 
-document.getElementById("view-scores").addEventListener("click", goViewHighScores);    
-document.getElementById("btn-start").addEventListener("click", startQuiz);
+document.querySelector("#view-scores").addEventListener("click", goViewHighScores);    
+// document.getElementById("btn-start").addEventListener("click", startQuiz);
 document.getElementById("btn-start").addEventListener("click", countDown);
