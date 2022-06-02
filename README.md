@@ -5,11 +5,12 @@
 - [Overview](#overview)
   - [Purpose](#purpose)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+  - [Video](#Video)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [What is next](#What-is-next)
 - [Author](#author)
 
 ## Overview
@@ -23,15 +24,14 @@ Users should be able to:
 
 - click the starts button to start answer questions.
 - click View high scores to check scores.
-- take down initials name.
+- take down initials name. (doesn't work)
 - click go back button and clean scores button.
 - choose answer based on question.
 
 
-### Screenshot
+### Video
 
-![]()
-![]()
+![](./assets/video/Coding%20Quiz.mp4)
 
 ### Links
 
@@ -48,22 +48,41 @@ Users should be able to:
 
 ### What I learned
 
-- 
+- can Jump to other web pages through js
+- can setting the countdown timer
 
-
-To see how I add code snippets, see below:
-```html
- <button onclick="myFunction()">Replace document</button>
-
-```
 ```JavaScript
-
 <script>
-function myFunction() {
-  location.replace("https://www.w3schools.com")
+function goViewHighScores() {
+  window.location.href = "high-scores.html";
+}
+
+function countDown() {
+  timeLeft = 75;
+  var timeInterval = setInterval(function() {
+
+    var resultEl = document. querySelector(".result");
+    if(resultEl.innerHTML.match(/wrong/gi)) {
+      timeLeft = timeLeft - 10;
+    }
+    timeEl.textContent = timeLeft + "s";
+    timeLeft--;
+
+    if(timeLeft <= 0 || saveInfo.length === questionsObj.length) {
+      clearInterval(timeInterval);
+      timeEl.textContent = 0 + "s";
+      window.alert("The quiz is over");
+    }
+  }, 1000);
+
+  startQuiz();
 }
 </script>
 ```
+
+### What is next
+
+The function and button to record the name cannot be used. I will continue to improve the code and the page format later.
 
 ## Author
 

@@ -115,13 +115,6 @@ function showQuiz() {
 
         // check the result
         checkAnswer();        
-
-    } else {
-
-        document.querySelector(".container").style.display = "none";
-        clearInterval(timeInterval);
-        console.log("here");
-        // end();
     }
 }
 
@@ -138,7 +131,6 @@ function checkAnswer() {
             setTimeout(function() {
                 var next = document.querySelector(".show-quiz");
                 next.remove();
-                // console.log(result);
                 result.innerHTML = "";  
 
                 if(quizIdCounter < questionsObj.length) {
@@ -185,8 +177,6 @@ function countDown() {
             timeEl.textContent = 0 + "s";
             window.alert("The quiz is over");
         }
-
-        
     }, 1000);
 
     startQuiz();
@@ -232,20 +222,16 @@ function end() {
     var nameInput = document.querySelector("input[name = 'user-name']").value;
     nameInput = nameEl;
 
-
-    saveMark();
     var clickbtn = document.getElementById("view-scores");
-    clickbtn.addEventListener("click", function(event) {
+    clickbtn.addEventListener("submit", function(event) {
         var targetEl = event.target;
+        localStorage.setItem("highscoreName", nameInput);
         targetEl.location.href = "high-scores.html";
-
     });
-
-    // localStorage.setItem("highscoreName", nameInput);
-    
+    saveMark();
 }
 
-var saveMark = function() {
+var saveMark = function(nameInput) {
 
     if(!nameInput) {
         nameEl = "";
@@ -253,7 +239,6 @@ var saveMark = function() {
         localStorage.setItem("highscoreName", nameEl); 
     } else {
         var nameInput = document.querySelector("input[name = 'user-name']").value;
-
 
         localStorage.setItem("highscore", scores);
         localStorage.setItem("highscoreName", nameEl);        
