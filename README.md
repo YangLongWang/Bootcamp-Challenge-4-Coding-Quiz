@@ -30,8 +30,7 @@ Users should be able to:
 
 
 ### Video
-
-![](./assets/video/Coding%20Quiz.mp4)
+[](..%5C..%5C..%5C..%5C..%5CDownloads%5CCoding%20Quiz.mp4)
 
 ### Links
 
