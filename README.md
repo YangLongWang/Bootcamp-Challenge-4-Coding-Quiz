@@ -29,9 +29,11 @@ Users should be able to:
 - choose answer based on question.
 
 
-### Video
-[](..%5C..%5C..%5C..%5C..%5CDownloads%5CCoding%20Quiz.mp4)
-
+### Screenshot
+![](./assets/pics/Coding%20Quiz%20-%201yanglongwang.github.io.png)
+![](/assets/pics/Coding%20Quiz%20-%202yanglongwang.github.io.png)
+![](/assets/pics/Coding%20Quiz%20-%203yanglongwang.github.io.png)
+![](/assets/pics/Coding%20Quiz%20-%204yanglongwang.github.io.png)
 ### Links
 
 - Solution URL: [https://github.com/YangLongWang/Bootcamp-Challenge-4-Coding-Quiz](https://github.com/YangLongWang/Bootcamp-Challenge-4-Coding-Quiz)
