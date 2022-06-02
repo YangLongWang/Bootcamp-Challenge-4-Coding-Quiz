@@ -12,23 +12,30 @@
         <section class="view-scores" id="view-scores">
             <p>View High Scores</p>
         </section>
-        <section class="timer" id="timer">
-            <p>Time:</p>
+        <section class="timer">
+            <p>Time:<span id="time"></span></p>
         </section>
     </header>
 
     <main>
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
-        <button>Start Quiz</button>
+        <section class="opening">
+            <section class="container">
+                <article class="text">
+                    <h1>Coding Quiz Challenge</h1>
+                    <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!</p>
+                </article>
+                <button class="btn" id="btn-start" type="button">Start Quiz</button>
+            </section>
+
+        </section>
+
+        <div class="divider"></div>
+        <section class="result" id="check"></section>
     </main>
 
-    <footer>
-        <p>&copy;Longyang Wang 2022</p>
-    </footer>
 
 
+    <!-- <script src="./assets/js/questions.js"></script> -->
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/questions.js"></script>
 </body>
 </html>
