@@ -118,9 +118,9 @@ function showQuiz() {
 
     } else {
 
-
-        // clearInterval(timeInterval);
-        // console.log("here");
+        document.querySelector(".container").style.display = "none";
+        clearInterval(timeInterval);
+        console.log("here");
         // end();
     }
 }
@@ -142,7 +142,6 @@ function checkAnswer() {
                 result.innerHTML = "";  
 
                 if(quizIdCounter < questionsObj.length) {
-                    console.log(quizIdCounter);
                     showQuiz(); 
                 } else if (quizIdCounter === questionsObj.length) {
                     end();
@@ -160,7 +159,6 @@ function checkAnswer() {
                 next.remove();
                 result.innerHTML = "";
                 if(quizIdCounter < questionsObj.length) {
-                    console.log(quizIdCounter);
                     showQuiz(); 
                 } else if (quizIdCounter === questionsObj.length) {
                     end();
@@ -183,10 +181,9 @@ function countDown() {
         timeLeft--;
 
         if(timeLeft <= 0 || saveInfo.length === questionsObj.length) {
-            console.log("time end");
             clearInterval(timeInterval);
             timeEl.textContent = 0 + "s";
-            // window.alert("The quiz is over")
+            window.alert("The quiz is over");
         }
 
         
@@ -194,8 +191,6 @@ function countDown() {
 
     startQuiz();
 }
-
-// if (timeLeft < 1 || quizIdCounter > questionsObj.length)
 
 function end() {
 
@@ -222,7 +217,7 @@ function end() {
     form.className = "text-input";
     form.setAttribute("type", "text");
     form.setAttribute("name", "user-name");
-    form.setAttribute("placeholder", "Enter initials name");
+    form.setAttribute("placeholder", "name:");
 
 
     formEl.appendChild(form);   
@@ -233,28 +228,37 @@ function end() {
     submit.textContent = "Submit";
 
     quiz.appendChild(submit);
-    console.log(quiz);
 
     var nameInput = document.querySelector("input[name = 'user-name']").value;
-    // if (!nameInput) {
-    //     alert("Please enter name.");
-    // }
-
-    var saveObj = {
-        name: nameInput,
-        mark: scores
-    };
-    saveInfo.push(saveObj);
+    nameInput = nameEl;
 
 
+    saveMark();
+    var clickbtn = document.getElementById("view-scores");
+    clickbtn.addEventListener("click", function(event) {
+        var targetEl = event.target;
+        targetEl.location.href = "high-scores.html";
+
+    });
+
+    // localStorage.setItem("highscoreName", nameInput);
+    
 }
 
 var saveMark = function() {
-    localStorage.setItem("info", JSON.stringify(saveInfo));
-    console.log(saveInfo);
+
+    if(!nameInput) {
+        nameEl = "";
+        localStorage.setItem("highscore", scores);
+        localStorage.setItem("highscoreName", nameEl); 
+    } else {
+        var nameInput = document.querySelector("input[name = 'user-name']").value;
+
+
+        localStorage.setItem("highscore", scores);
+        localStorage.setItem("highscoreName", nameEl);        
+    }
 }
 
-
 document.querySelector("#view-scores").addEventListener("click", goViewHighScores);    
-// document.getElementById("btn-start").addEventListener("click", startQuiz);
 document.getElementById("btn-start").addEventListener("click", countDown);
