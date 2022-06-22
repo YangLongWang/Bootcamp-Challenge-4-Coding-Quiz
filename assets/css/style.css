@@ -15,8 +15,8 @@ header {
 }
 
 .opening {
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     align-items: center;
     padding: 15px;
     margin: 30px 100px 0 100px;
@@ -27,7 +27,7 @@ header {
     margin: 50px 100px 0 100px;
 }
 
-.text h1, .show-quiz h1 {
+.text h1, .show-quiz h2 {
     font-size: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 20px;
