@@ -15,8 +15,8 @@ header {
 }
 
 .opening {
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 15px;
     margin: 30px 100px 0 100px;
@@ -32,13 +32,23 @@ header {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 20px;
     margin: 10px;
+    text-align: center;
 }
 
-.text p, .answer {
+.text p, .options {
     font-size: 26px;
     font-family:  Helvetica, Arial, sans-serif;
     padding: 20px;
     margin: 10px;
+}
+
+.show-quiz {
+    width: 1300px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
 }
 
 .container {
