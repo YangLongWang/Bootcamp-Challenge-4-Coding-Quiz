@@ -44,7 +44,7 @@ const questionsObj = [
 var nameId = 0;
 var quizIdCounter = 0;
 var answerIdCounter = 0; 
-// var quizIndex = 0;
+var quizIndex = 0;
 var scores = 0;
 var timeLeft = 0;
 var opening = document.querySelector(".opening");
@@ -57,180 +57,6 @@ var saveInfo = [];
 function goViewHighScores() {
     window.location.href = "high-scores.html";
 }
-
-function startQuiz() {
-    // console.log(questionsObj.length);
-    // remove the opening title & start button
-    var opening = document.querySelector(".opening");
-    var containerInfo = document.querySelector(".container");
-    opening.removeChild(containerInfo);
-
-    document.querySelector(".divider").style.visibility = "visible";
-
-    // showQuiz();
-    for (var i=0; i<questionsObj.length; i++) {
-        // whole one question (question + options)
-        // question title
-        var quiz = document.createElement("div");
-        quiz.classList.add("show-quiz");
-        quiz.setAttribute("data-quiz-id", quizIdCounter);
-        
-        opening.appendChild(quiz);
-
-        var question = document.createElement("h2");
-        question.classList.add("question-title");
-        question.textContent = questionsObj[i].question;
-
-        quiz.appendChild(question);
-
-        // 4 options
-        var options = document.createElement("div");
-        options.classList.add("options");
-        
-        question.appendChild(options);
-
-        var opA = document.createElement("button");
-        var opB = document.createElement("button");
-        var opC = document.createElement("button");
-        var opD = document.createElement("button");
-
-        opA.classList.add("btn", "btn-1", "option");
-        opB.classList.add("btn", "btn-2", "option");
-        opC.classList.add("btn", "btn-3", "option");
-        opD.classList.add("btn", "btn-4", "option");
-
-        // opA.setAttribute("id", "no");
-        // opB.setAttribute("id", "no");
-        // opC.setAttribute("id", "no");
-        // opD.setAttribute("id", "no");
-
-        // opA.setAttribute("data-answer", answerIdCounter);
-        // opB.setAttribute("data-answer", answerIdCounter);
-        // opC.setAttribute("data-answer", answerIdCounter);
-        // opD.setAttribute("data-answer", answerIdCounter);
-
-        opA.textContent = questionsObj[i].a;
-        opB.textContent = questionsObj[i].b;
-        opC.textContent = questionsObj[i].c;
-        opD.textContent = questionsObj[i].d;
-
-        options.appendChild(opA);
-        options.appendChild(opB);
-        options.appendChild(opC);
-        options.appendChild(opD);
-
-        // 4 options end
-        // whole one question end
-
-        quizIdCounter++;
-        // answerIdCounter++;
-        // quizIndex++;
-
-        // check the result
-        // checkAnswer();     
-        
-         
-    }
-
-}
-
-
-// function showQuiz() {
-
-//     if (quizIdCounter <= questionsObj.length) {
-//         // whole one question (question + options)
-//         var quiz = document.createElement("div");
-//         quiz.className = "show-quiz";
-//         quiz.setAttribute("data-quiz-id", quizIdCounter);
-//         quiz.innerHTML = "<h1>" + questionsObj[quizIndex].question + "</h1>";
-
-//         opening.appendChild(quiz);
-
-//         // 4 options
-//         var options = document.createElement("div");
-//         options.className = "answer";
-        
-//         quiz.appendChild(options);
-
-//         var opA = document.createElement("button");
-//         var opB = document.createElement("button");
-//         var opC = document.createElement("button");
-//         var opD = document.createElement("button");
-
-//         opA.className = "btn btn-1";
-//         opB.className = "btn btn-2";
-//         opC.className = "btn btn-3";
-//         opD.className = "btn btn-4";
-
-//         opA.setAttribute("data-answer-id", answerIdCounter);
-//         opB.setAttribute("data-answer-id", answerIdCounter);
-//         opC.setAttribute("data-answer-id", answerIdCounter);
-//         opD.setAttribute("data-answer-id", answerIdCounter);
-
-//         opA.textContent = questionsObj[quizIndex].a;
-//         opB.textContent = questionsObj[quizIndex].b;
-//         opC.textContent = questionsObj[quizIndex].c;
-//         opD.textContent = questionsObj[quizIndex].d;
-
-//         options.appendChild(opA);
-//         options.appendChild(opB);
-//         options.appendChild(opC);
-//         options.appendChild(opD);
-
-//         // 4 options end
-//         // whole one question end
-
-//         quizIdCounter++;
-//         answerIdCounter++;
-//         quizIndex++;
-
-//         // check the result
-//         checkAnswer();
-//     }
-// }
-
-// function checkAnswer() {
-
-//     document.querySelector(".answer").addEventListener("click", function(event) {
-//         var targetEl = event.target;    
-//         if (targetEl.matches(".btn-4")) {
-//             result.innerHTML = "Correct!"
-//             scores += 10;
-//             saveInfo.push(scores);
-//             saveMark();
-
-//             setTimeout(function() {
-//                 var next = document.querySelector(".show-quiz");
-//                 next.remove();
-//                 result.innerHTML = "";  
-
-//                 if(quizIdCounter < questionsObj.length) {
-//                     showQuiz(); 
-//                 } else if (quizIdCounter === questionsObj.length) {
-//                     end();
-//                 }             
-//             }, 1000);
-                
-//         } else {
-//             result.innerHTML = "Wrong!"
-//             scores -= 10;
-//             saveInfo.push(scores);
-//             saveMark();
-
-//             setTimeout(function() {
-//                 var next = document.querySelector(".show-quiz");
-//                 next.remove();
-//                 result.innerHTML = "";
-//                 if(quizIdCounter < questionsObj.length) {
-//                     showQuiz(); 
-//                 } else if (quizIdCounter === questionsObj.length) {
-//                     end();
-//                 }             
-              
-//             }, 1000);
-//         }
-//     })
-// }
 
 function countDown() {
     timeLeft = 75;
@@ -247,11 +73,124 @@ function countDown() {
             clearInterval(timeInterval);
             timeEl.textContent = 0 + "s";
             window.alert("The quiz is over");
+            end();
         }
     }, 1000);
 
     startQuiz();
 }
+
+function startQuiz() {
+    // remove the opening title & start button
+    var opening = document.querySelector(".opening");
+    var containerInfo = document.querySelector(".container");
+    opening.removeChild(containerInfo);
+
+    document.querySelector(".divider").style.visibility = "visible";
+
+    if (quizIdCounter <= questionsObj.length) {
+        // whole one question (question + options)
+        var container = document.createElement("section");
+        container.classList.add("container");
+
+        opening.appendChild(container);
+
+        // question title
+        var quiz = document.createElement("div");
+        quiz.classList.add("show-quiz");
+        quiz.setAttribute("data-quiz-id", quizIdCounter);
+        
+        container.appendChild(quiz);
+
+        var question = document.createElement("h2");
+        question.classList.add("question-title");
+        question.textContent = questionsObj[quizIndex].question;
+
+        quiz.appendChild(question);
+
+        // 4 options
+        var options = document.createElement("div");
+        options.classList.add("options");
+        options.setAttribute("id", "options");
+        
+        question.appendChild(options);
+
+        var opA = document.createElement("button");
+        var opB = document.createElement("button");
+        var opC = document.createElement("button");
+        var opD = document.createElement("button");
+
+        opA.classList.add("btn", "btn-1", "option");
+        opB.classList.add("btn", "btn-2", "option");
+        opC.classList.add("btn", "btn-3", "option");
+        opD.classList.add("btn", "btn-4", "option");
+
+        // opA.setAttribute("data-answer", answerIdCounter);
+        // opB.setAttribute("data-answer", answerIdCounter);
+        // opC.setAttribute("data-answer", answerIdCounter);
+        // opD.setAttribute("data-answer", answerIdCounter);
+
+        opA.textContent = questionsObj[quizIndex].a;
+        opB.textContent = questionsObj[quizIndex].b;
+        opC.textContent = questionsObj[quizIndex].c;
+        opD.textContent = questionsObj[quizIndex].d;
+
+        options.appendChild(opA);
+        options.appendChild(opB);
+        options.appendChild(opC);
+        options.appendChild(opD);
+
+        // 4 options end
+        // whole one question end
+
+        quizIdCounter++;
+        // answerIdCounter++;
+        quizIndex++;
+
+        // check the result
+        // debugger;
+        // checkAnswer();
+        var check = document.querySelector("#options");
+        check.addEventListener("click", function(event) {
+            var targetEl = event.target;
+            console.log(targetEl);
+            // console.log(targetEl.value());
+
+            if (targetEl.matches(".btn-4")) {
+                result.textContent = "Correct!";
+                scores += 10;
+                saveInfo.push(scores);
+                saveMark();
+
+                setTimeout(showResult, 1000);
+
+            } else {
+                result.textContent = "Wrong!"
+                scores -= 10;
+                saveInfo.push(scores);
+                saveMark();
+
+                setTimeout(showResult, 1000);
+
+            }
+        })
+    }
+}
+
+function showResult() {
+    var next = document.querySelector(".show-quiz");
+    next.remove();
+    result.textContent = "";  
+
+    if(quizIdCounter < questionsObj.length) {
+        startQuiz(); 
+    } else if (quizIdCounter === questionsObj.length) {
+        end();
+    }       
+}
+          
+
+
 
 function end() {
 
