@@ -40,7 +40,6 @@ const questionsObj = [
         answer: "D. console.log"
     }
 ];
-
 var nameId = 0;
 var quizIdCounter = 0;
 var quizIndex = 0;
