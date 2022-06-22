@@ -43,7 +43,6 @@ const questionsObj = [
 
 var nameId = 0;
 var quizIdCounter = 0;
-var answerIdCounter = 0; 
 var quizIndex = 0;
 var scores = 0;
 var timeLeft = 0;
@@ -52,7 +51,8 @@ var result = document.querySelector(".result");
 var timeEl = document.getElementById("time");
 var saveInfo = [];
 
-// when time is over, it can't turn to next. it still leaves quiz 
+// when time is over, check
+// when quiz is over, the quiz can be remove, but the next doesn't show
 
 function goViewHighScores() {
     window.location.href = "high-scores.html";
@@ -73,6 +73,9 @@ function countDown() {
             clearInterval(timeInterval);
             timeEl.textContent = 0 + "s";
             window.alert("The quiz is over");
+            var opening = document.querySelector(".opening");
+            var containerInfo = document.querySelector(".container");
+            opening.removeChild(containerInfo);            
             end();
         }
     }, 1000);
@@ -125,11 +128,6 @@ function startQuiz() {
         opC.classList.add("btn", "btn-3", "option");
         opD.classList.add("btn", "btn-4", "option");
 
-        // opA.setAttribute("data-answer", answerIdCounter);
-        // opB.setAttribute("data-answer", answerIdCounter);
-        // opC.setAttribute("data-answer", answerIdCounter);
-        // opD.setAttribute("data-answer", answerIdCounter);
-
         opA.textContent = questionsObj[quizIndex].a;
         opB.textContent = questionsObj[quizIndex].b;
         opC.textContent = questionsObj[quizIndex].c;
@@ -140,20 +138,15 @@ function startQuiz() {
         options.appendChild(opC);
         options.appendChild(opD);
 
-        // 4 options end
-        // whole one question end
-
         quizIdCounter++;
-        // answerIdCounter++;
         quizIndex++;
 
         // check the result
-        // debugger;
         // checkAnswer();
         var check = document.querySelector("#options");
         check.addEventListener("click", function(event) {
             var targetEl = event.target;
-            console.log(targetEl);
+            // console.log(targetEl);
             // console.log(targetEl.value());
 
             if (targetEl.matches(".btn-4")) {
@@ -161,17 +154,13 @@ function startQuiz() {
                 scores += 10;
                 saveInfo.push(scores);
                 saveMark();
-
                 setTimeout(showResult, 1000);
-
             } else {
                 result.textContent = "Wrong!"
                 scores -= 10;
                 saveInfo.push(scores);
                 saveMark();
-
                 setTimeout(showResult, 1000);
-
             }
         })
     }
@@ -182,15 +171,10 @@ function showResult() {
     next.remove();
     result.textContent = "";  
 
-    if(quizIdCounter < questionsObj.length) {
-        startQuiz(); 
-    } else if (quizIdCounter === questionsObj.length) {
-        end();
-    }       
+    // if (quizIdCounter < questionsObj.length || quizIdCounter === questionsObj.length) {
+    //     startQuiz(); 
+    // }
 }
-          
-
-
 
 function end() {
 
