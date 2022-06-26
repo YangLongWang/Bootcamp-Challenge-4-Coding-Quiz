@@ -4,13 +4,13 @@
 
 - [Overview](#overview)
   - [Purpose](#purpose)
+  - [Description](#description)
   - [The challenge](#the-challenge)
-  - [Screenshot](#Screenshot)
+  - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
-  - [Built with](#built-with)
+  - [Built with](#build-with)
   - [What I learned](#what-i-learned)
-  - [What is next](#What-is-next)
 - [Author](#author)
 
 ## Overview
@@ -18,26 +18,28 @@
 ### Purpose
 Practice the coding assignment.
 
+### Description
+Recreate all functions, right now is all working, and improve the formatting.
+
 ### The challenge
 
 Users should be able to:
 
 - click the starts button to start answer questions.
 - click View high scores to check scores.
-- take down initials name. (doesn't work)
+- take down initials name.
 - click go back button and clean scores button.
 - choose answer based on question.
 
-
 ### Screenshot
-![](./assets/pics/Coding%20Quiz%20-%201yanglongwang.github.io.png)
-![](/assets/pics/Coding%20Quiz%20-%202yanglongwang.github.io.png)
-![](/assets/pics/Coding%20Quiz%20-%203yanglongwang.github.io.png)
-![](/assets/pics/Coding%20Quiz%20-%204yanglongwang.github.io.png)
+![](./assets/pics/Coding%20Quiz1%20-%20127.0.0.1.png)
+![](./assets/pics/Coding%20Quiz2%20-%20127.0.0.1.png)
+![](./assets/pics/Coding%20Quiz3%20-%20127.0.0.1.png)
+![](./assets/pics/Coding%20Quiz4%20-%20127.0.0.1.png)
 ### Links
 
-- Solution URL: [https://github.com/YangLongWang/Bootcamp-Challenge-4-Coding-Quiz](https://github.com/YangLongWang/Bootcamp-Challenge-4-Coding-Quiz)
-- Live Site URL: [https://yanglongwang.github.io/Bootcamp-Challenge-4-Coding-Quiz/](https://yanglongwang.github.io/Bootcamp-Challenge-4-Coding-Quiz/)
+- Solution URL: [https://github.com/YangLongWang/Coding-Quiz](https://github.com/YangLongWang/Coding-Quiz)
+- Live Site URL: [https://yanglongwang.github.io/Coding-Quiz/](https://yanglongwang.github.io/Coding-Quiz/)
 
 ## My process
 
@@ -49,41 +51,31 @@ Users should be able to:
 
 ### What I learned
 
-- can Jump to other web pages through js
-- can setting the countdown timer
+- setting the countdown timer
 
 ```JavaScript
 <script>
-function goViewHighScores() {
-  window.location.href = "high-scores.html";
-}
-
-function countDown() {
-  timeLeft = 75;
+function timer() {
+  var timeLeft = 70;
   var timeInterval = setInterval(function() {
-
-    var resultEl = document. querySelector(".result");
-    if(resultEl.innerHTML.match(/wrong/gi)) {
-      timeLeft = timeLeft - 10;
-    }
+    var timeEl = document.querySelector("#second");
     timeEl.textContent = timeLeft + "s";
     timeLeft--;
-
-    if(timeLeft <= 0 || saveInfo.length === questionsObj.length) {
+    if (result.textContent.match(/wrong/gi)) {
+      timeLeft -= 10; 
+    }
+    if (timeLeft < 0 || scores.length === questionsArr.length) {
       clearInterval(timeInterval);
+      alert("Quiz is over");
       timeEl.textContent = 0 + "s";
-      window.alert("The quiz is over");
+      index += questionsArr.length;
+      createQuiz();
     }
   }, 1000);
-
-  startQuiz();
+  createQuiz();
 }
 </script>
 ```
-
-### What is next
-
-The function and button to record the name cannot be used. I will continue to improve the code and the page format later.
 
 ## Author
 
